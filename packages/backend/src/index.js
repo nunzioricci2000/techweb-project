@@ -12,6 +12,7 @@ import Signup from './core/use_cases/signup.js';
 import KoaAuthController from './interface_adapters/controllers/koa_auth_controller.js';
 import ConsoleLoggerService from './infrastructure/services/console_logger_service.js';
 import MissingRequestParameterError from './core/use_cases/errors/missing_request_parameter.js';
+import KoaAuthMiddleware from './infrastructure/middleware/koa_auth_middleware.js';
 
 async function awaitMain() {
     try {
@@ -22,6 +23,7 @@ async function awaitMain() {
     }
     const dependencies = wireDependencies();
     const app = new Koa();
+    app.use(dependencies.koaAuthMiddleware.getMiddleware());
     const router = new KoaRouter();
     router.get('/', async (ctx) => {
         ctx.body = 'Hello, World!';
@@ -56,8 +58,9 @@ function wireDependencies() {
     const hashService = new Argon2HashService(loggerService);
     const userRepository = new SequelizeUserRepository(loggerService);
     const tokenService = new JwtTokenService("your-secret-key", "1h", loggerService);
+    const koaAuthMiddleware = new KoaAuthMiddleware(tokenService, loggerService);
 
-    return { loggerService, hashService, userRepository, tokenService };
+    return { loggerService, hashService, userRepository, tokenService, koaAuthMiddleware };
 }
 
 /**
@@ -65,7 +68,7 @@ function wireDependencies() {
  * @param {Object} dependencies
  */
 function composeAuthFeatures(ctx, dependencies) {
-    const { loggerService, hashService, userRepository, tokenService } = dependencies;
+    const { loggerService, hashService, userRepository, tokenService, koaAuthMiddleware } = dependencies;
     const loginPresenter = new KoaLoginPresenter(ctx, loggerService);
     const signupPresenter = new KoaSignupPresenter(ctx, loggerService);
     const loginInteractor = new Login(userRepository, hashService, tokenService, loginPresenter, loggerService);
