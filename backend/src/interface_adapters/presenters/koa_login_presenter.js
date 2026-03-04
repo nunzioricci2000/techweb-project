@@ -16,10 +16,10 @@ export default class KoaLoginPresenter extends LoginPresenter {
         this.#loggerService = loggerService;
     }
 
-    present(username) {
-        this.#loggerService.debug(`Login successful for user: ${username}`);
+    present(token) {
+        this.#loggerService.debug(`Login successful for user: ${token}`);
         this.ctx.status = 200;
-        this.ctx.body = { username };
+        this.ctx.body = { token };
     }
 
     presentError(error) {
