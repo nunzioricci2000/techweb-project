@@ -1,0 +1,8 @@
+{
+  "name": "@techweb-project/auth-core",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@techweb-project/core": "*"
+  }
+}
