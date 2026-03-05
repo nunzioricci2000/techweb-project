@@ -1,0 +1,10 @@
+{
+  "name": "@techweb-project/review-core",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@techweb-project/core": "*",
+    "@techweb-project/auth-core": "*",
+    "@techweb-project/restaurant-core": "*"
+  }
+}
