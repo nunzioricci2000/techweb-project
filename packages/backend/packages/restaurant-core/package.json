@@ -1,0 +1,9 @@
+{
+  "name": "@techweb-project/restaurant-core",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@techweb-project/core": "*",
+    "@techweb-project/auth-core": "*"
+  }
+}
