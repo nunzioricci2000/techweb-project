@@ -1,0 +1,12 @@
+{
+  "name": "@techweb-project/persistence",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@techweb-project/core": "*",
+    "@techweb-project/auth-core": "*",
+    "@techweb-project/restaurant-core": "*",
+    "@techweb-project/review-core": "*",
+    "sequelize": "^6.37.7"
+  }
+}
