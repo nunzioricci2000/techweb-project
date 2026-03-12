@@ -3,6 +3,10 @@ export default class LoggerService {
         throw new Error("Method 'log' must be implemented");
     }
 
+    info(...args) {
+        throw new Error("Method 'info' must be implemented");
+    }
+
     error(...args) {
         throw new Error("Method 'error' must be implemented");
     }
