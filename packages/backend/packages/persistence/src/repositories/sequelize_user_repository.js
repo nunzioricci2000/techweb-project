@@ -1,4 +1,4 @@
-import { UserRepository } from "@techweb-backend/auth-core";
+import { UserRepository } from "@techweb-project/auth-core";
 import UserModel from "../models/user_model.js";
 
 export class SequelizeUserRepository extends UserRepository {
@@ -20,7 +20,7 @@ export class SequelizeUserRepository extends UserRepository {
     async create(username, passwordHash) {
         this.#loggerService.debug(`Creating user: ${username}`);
         const user = await UserModel.create({ username, passwordHash });
-        return { username: user.username };
+        return user.username;
     }
 
     async getPasswordHash(username) {
