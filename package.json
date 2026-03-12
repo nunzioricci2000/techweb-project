@@ -1,0 +1,14 @@
+{
+    "name": "techweb-project",
+    "version": "1.0.0",
+    "description": "A web technology project",
+    "main": "index.js",
+    "keywords": [],
+    "author": "Nunzio Ricci",
+    "license": "ISC",
+    "dependencies": {},
+    "workspaces": [
+        "packages/backend",
+        "packages/backend/packages/*"
+    ]
+}

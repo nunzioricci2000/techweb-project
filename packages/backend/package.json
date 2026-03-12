@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "techweb-backend",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
@@ -11,12 +11,19 @@
     "start": "node src/index.js"
   },
   "dependencies": {
-    "@koa/bodyparser": "^6.1.0",
-    "@koa/router": "^15.3.1",
+    "@techweb-project/core": "*",
+    "@techweb-project/console-logger": "*",
+    "@techweb-project/auth-core": "*",
+    "@techweb-project/persistence": "*",
+    "@koa/bodyparser": "^6.0.0",
+    "@koa/router": "^13.1.1",
     "argon2": "^0.44.0",
-    "jsonwebtoken": "^9.0.3",
-    "koa": "^3.1.2",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.16.2",
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
