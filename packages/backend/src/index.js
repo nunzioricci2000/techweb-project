@@ -7,44 +7,11 @@ import { AuthCoreRegistry, HashService, TokenService, LoginPresenter, SignupPres
 import ConsoleLogger from "@techweb-project/console-logger";
 import { PersistenceRegistry } from "@techweb-project/persistence";
 import Argon2HashService from "@techweb-project/argon2-hash";
+import JwtTokenService from "@techweb-project/jwt-service";
 
 const DEFAULT_PORT = 3000;
 const DEFAULT_JWT_EXPIRES_IN = "1h";
 const DEFAULT_JWT_SECRET = "dev-secret-change-me";
-
-class JwtTokenService extends TokenService {
-    /** @type {string} */
-    #secret;
-
-    /** @type {string} */
-    #expiresIn;
-
-    /**
-     * @param {Object} params
-     * @param {string} params.secret
-     * @param {string} params.expiresIn
-     */
-    constructor({ secret, expiresIn }) {
-        super();
-        this.#secret = secret;
-        this.#expiresIn = expiresIn;
-    }
-
-    async generateToken(username) {
-        return jwt.sign({ username }, this.#secret, { expiresIn: this.#expiresIn });
-    }
-
-    async validateToken(token) {
-        try {
-            const payload = jwt.verify(token, this.#secret);
-            return typeof payload === "object" && payload !== null && "username" in payload
-                ? payload.username
-                : null;
-        } catch {
-            return null;
-        }
-    }
-}
 
 class HttpLoginPresenter extends LoginPresenter {
     /** @type {{ status: number, body: Object }} */

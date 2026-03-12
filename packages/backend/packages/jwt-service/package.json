@@ -1,0 +1,8 @@
+{
+  "name": "@techweb-project/jwt-service",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@techweb-project/auth-core": "*"
+  }
+}
