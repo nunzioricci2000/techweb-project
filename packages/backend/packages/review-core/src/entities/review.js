@@ -1,5 +1,5 @@
-import { User } from "@techweb-project/auth-core";
-import { Restaurant } from "@techweb-project/restaurant-core";
+import { User } from "@techweb-backend/auth-core";
+import { Restaurant } from "@techweb-backend/restaurant-core";
 
 export default class Review {
     /** @type {number} */

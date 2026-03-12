@@ -1,5 +1,5 @@
-import { LoggerService } from "@techweb-project/core";
-import { UserRepository } from "@techweb-project/auth-core";
+import { LoggerService } from "@techweb-backend/core";
+import { UserRepository } from "@techweb-backend/auth-core";
 
 import { SequelizeUserRepository } from "./repositories/sequelize_user_repository.js";
 import { Sequelize } from 'sequelize';

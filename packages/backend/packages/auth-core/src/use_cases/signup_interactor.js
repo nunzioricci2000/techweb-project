@@ -1,4 +1,4 @@
-import { LoggerService } from "@techweb-project/core";
+import { LoggerService } from "@techweb-backend/core";
 
 import User from "../entities/user.js";
 import UserRepository from "./interfaces/user_repository.js";

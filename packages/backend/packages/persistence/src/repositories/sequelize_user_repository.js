@@ -1,4 +1,4 @@
-import { UserRepository } from "@techweb-project/auth-core";
+import { UserRepository } from "@techweb-backend/auth-core";
 import UserModel from "../models/user_model.js";
 
 export class SequelizeUserRepository extends UserRepository {

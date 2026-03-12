@@ -1,4 +1,4 @@
-import LoggerService from '@techweb-project/logger-service';
+import LoggerService from '@techweb-backend/logger-service';
 
 export default class ConsoleLogger extends LoggerService {
     log(...args) {
