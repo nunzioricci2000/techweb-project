@@ -9,6 +9,8 @@
     "dependencies": {},
     "workspaces": [
         "packages/backend",
-        "packages/backend/packages/*"
+        "packages/backend/packages/*",
+        "packages/frontend",
+        "packages/frontend/packages/*"
     ]
 }
