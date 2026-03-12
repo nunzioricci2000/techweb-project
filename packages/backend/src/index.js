@@ -1,108 +1,15 @@
 import Koa from "koa";
-import Router from "@koa/router";
 import bodyParser from "@koa/bodyparser";
-import jwt from "jsonwebtoken";
 
-import { AuthCoreRegistry, HashService, TokenService, LoginPresenter, SignupPresenter } from "@techweb-project/auth-core";
 import ConsoleLogger from "@techweb-project/console-logger";
 import { PersistenceRegistry } from "@techweb-project/persistence";
 import Argon2HashService from "@techweb-project/argon2-hash";
 import JwtTokenService from "@techweb-project/jwt-service";
+import { createAuthRouter } from "@techweb-project/auth-koa";
 
 const DEFAULT_PORT = 3000;
 const DEFAULT_JWT_EXPIRES_IN = "1h";
 const DEFAULT_JWT_SECRET = "dev-secret-change-me";
-
-class HttpLoginPresenter extends LoginPresenter {
-    /** @type {{ status: number, body: Object }} */
-    response = { status: 500, body: { error: "Unknown error" } };
-
-    async present(token) {
-        this.response = {
-            status: 200,
-            body: { token }
-        };
-    }
-
-    async presentError(error) {
-        this.response = mapAuthError(error);
-    }
-}
-
-class HttpSignupPresenter extends SignupPresenter {
-    /** @type {{ status: number, body: Object }} */
-    response = { status: 500, body: { error: "Unknown error" } };
-
-    async present(username) {
-        this.response = {
-            status: 201,
-            body: { username }
-        };
-    }
-
-    async presentError(error) {
-        this.response = mapAuthError(error);
-    }
-}
-
-/**
- * @param {Error} error
- * @returns {{ status: number, body: Object }}
- */
-function mapAuthError(error) {
-    if (error?.name === "MissingRequestParameterError") {
-        return {
-            status: 400,
-            body: { error: error.message }
-        };
-    }
-
-    if (error?.name === "InvalidCredentialsError") {
-        return {
-            status: 401,
-            body: { error: error.message }
-        };
-    }
-
-    if (error?.name === "UserAlreadyExistsError") {
-        return {
-            status: 409,
-            body: { error: error.message }
-        };
-    }
-
-    return {
-        status: 500,
-        body: { error: "Internal server error" }
-    };
-}
-
-/**
- * @param {Object} params
- * @param {import('@techweb-project/auth-core').UserRepository} params.userRepository
- * @param {HashService} params.hashService
- * @param {TokenService} params.tokenService
- * @param {import('@techweb-project/core').LoggerService} params.loggerService
- */
-function createAuthRegistry({ userRepository, hashService, tokenService, loggerService }) {
-    const loginPresenter = new HttpLoginPresenter();
-    const signupPresenter = new HttpSignupPresenter();
-
-    const authRegistry = new AuthCoreRegistry({
-        loggerService,
-        userRepository,
-        hashService,
-        tokenService,
-        loginPresenter,
-        signupPresenter
-    });
-
-    return {
-        authRegistry,
-        loginPresenter,
-        signupPresenter
-    };
-}
 
 /**
  * @returns {Promise<import('http').Server>}
@@ -121,54 +28,11 @@ export async function main() {
     });
 
     const app = new Koa();
-    const router = new Router();
-
     app.use(bodyParser());
 
-    router.post("/auth/signup", async (ctx) => {
-        const { authRegistry, signupPresenter } = createAuthRegistry({
-            userRepository,
-            hashService,
-            tokenService,
-            loggerService
-        });
-
-        const signupInteractor = authRegistry.getSignupInteractor();
-
-        try {
-            await signupInteractor.execute({
-                username: ctx.request.body?.username,
-                password: ctx.request.body?.password
-            });
-        } catch (error) {
-            await signupPresenter.presentError(error);
-        }
-
-        ctx.status = signupPresenter.response.status;
-        ctx.body = signupPresenter.response.body;
-    });
-
-    router.post("/auth/login", async (ctx) => {
-        const { authRegistry, loginPresenter } = createAuthRegistry({
-            userRepository,
-            hashService,
-            tokenService,
-            loggerService
-        });
-
-        const loginInteractor = authRegistry.getLoginInteractor();
-
-        await loginInteractor.execute({
-            username: ctx.request.body?.username,
-            password: ctx.request.body?.password
-        });
-
-        ctx.status = loginPresenter.response.status;
-        ctx.body = loginPresenter.response.body;
-    });
-
-    app.use(router.routes());
-    app.use(router.allowedMethods());
+    const authRouter = createAuthRouter({ userRepository, hashService, tokenService, loggerService });
+    app.use(authRouter.routes());
+    app.use(authRouter.allowedMethods());
 
     const port = Number(process.env.PORT) || DEFAULT_PORT;
     const server = app.listen(port, () => {

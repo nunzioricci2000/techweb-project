@@ -15,6 +15,7 @@
     "@techweb-project/console-logger": "*",
     "@techweb-project/argon2-hash": "*",
     "@techweb-project/auth-core": "*",
+    "@techweb-project/auth-koa": "*",
     "@techweb-project/jwt-service": "*",
     "@techweb-project/persistence": "*",
     "@koa/bodyparser": "^6.0.0",
