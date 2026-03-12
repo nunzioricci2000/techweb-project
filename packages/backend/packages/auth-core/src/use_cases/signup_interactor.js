@@ -1,11 +1,11 @@
-import { LoggerService } from "@techweb-backend/core";
+import { LoggerService } from "@techweb-project/core";
 
 import User from "../entities/user.js";
-import UserRepository from "./interfaces/user_repository.js";
-import HashService from "./interfaces/hash_service.js";
-import SignupPresenter from "./interfaces/signup_presenter.js";
-import UserAlreadyExistsError from "./errors/user_already_exists.js";
-import MissingRequestParameterError from "./errors/missing_request_parameter.js";
+import UserRepository from "../interfaces/user_repository.js";
+import HashService from "../interfaces/hash_service.js";
+import SignupPresenter from "../interfaces/signup_presenter.js";
+import UserAlreadyExistsError from "../errors/user_already_exists.js";
+import MissingRequestParameterError from "../errors/missing_request_parameter.js";
 
 export default class SignupInteractor {
     /** @type {UserRepository} */
@@ -54,9 +54,9 @@ export default class SignupInteractor {
                 throw new UserAlreadyExistsError(username);
             }
             const passwordHash = await this.#hashService.hashPassword(password);
-            const createdUser = await this.#userRepository.create(username, passwordHash);
-            await this.#signupPresenter.present(createdUser.username);
-            return createdUser;
+            const createdUsername = await this.#userRepository.create(username, passwordHash);
+            await this.#signupPresenter.present(createdUsername);
+            return new User(createdUsername);
         } catch (error) {
             this.#loggerService.error(`Signup failed for user: ${username}`);
             await this.#signupPresenter.presentError(error);

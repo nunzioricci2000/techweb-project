@@ -1,12 +1,12 @@
-import { LoggerService } from "@techweb-backend/core";
+import { LoggerService } from "@techweb-project/core";
 
 import User from "../entities/user.js";
-import InvalidCredentialsError from "./errors/invalid_credentials.js";
-import MissingRequestParameterError from "./errors/missing_request_parameter.js";
-import HashService from "./interfaces/hash_service.js";
-import LoginPresenter from "./interfaces/login_presenter.js";
-import TokenService from "./interfaces/token_service.js";
-import UserRepository from "./interfaces/user_repository.js";
+import InvalidCredentialsError from "../errors/invalid_credentials.js";
+import MissingRequestParameterError from "../errors/missing_request_parameter.js";
+import HashService from "../interfaces/hash_service.js";
+import LoginPresenter from "../interfaces/login_presenter.js";
+import TokenService from "../interfaces/token_service.js";
+import UserRepository from "../interfaces/user_repository.js";
 
 export default class LoginInteractor {
     /** @type {UserRepository} */

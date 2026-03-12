@@ -1,16 +1,16 @@
 import User from "./entities/user.js";
 export { User };
 
-import HashService from "./interfaces/hash_service";
-import UserRepository from "./interfaces/user_repository";
-import TokenService from "./interfaces/token_service";
-import LoginPresenter from "./interfaces/login_presenter";
-import SignupPresenter from "./interfaces/signup_presenter";
+import HashService from "./interfaces/hash_service.js";
+import UserRepository from "./interfaces/user_repository.js";
+import TokenService from "./interfaces/token_service.js";
+import LoginPresenter from "./interfaces/login_presenter.js";
+import SignupPresenter from "./interfaces/signup_presenter.js";
 import LoginInteractor from "./use_cases/login_interactor.js";
 import SignupInteractor from "./use_cases/signup_interactor.js";
 export { HashService, TokenService, UserRepository, LoginPresenter, SignupPresenter };
 
-import { LoggerService } from "@techweb-backend/core";
+import { LoggerService } from "@techweb-project/core";
 
 export class AuthCoreRegistry {
     /** @type {LoginInteractor} */
