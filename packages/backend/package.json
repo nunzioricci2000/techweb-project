@@ -14,6 +14,7 @@
     "start": "node src/index.js"
   },
   "dependencies": {
+    "@koa/multer": "^4.0.0",
     "@koa/bodyparser": "^6.0.0",
     "@koa/cors": "^5.0.0",
     "@koa/router": "^13.1.1",
@@ -24,9 +25,13 @@
     "@techweb-project/core": "*",
     "@techweb-project/jwt-service": "*",
     "@techweb-project/persistence": "*",
+    "@techweb-project/restaurant-core": "*",
+    "@techweb-project/restaurant-koa": "*",
+    "@techweb-project/review-core": "*",
     "argon2": "^0.44.0",
     "jsonwebtoken": "^9.0.2",
     "koa": "^2.16.2",
+    "koa-static": "^5.0.0",
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7"
   },

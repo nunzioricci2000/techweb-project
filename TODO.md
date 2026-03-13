@@ -6,11 +6,7 @@ Scrivo questo TODO al me del futuro nella speranza che non si sarà dimenticato 
 
 Attualmente il progetto è in fase di ristrutturazione. Stanno venendo creati vari sottopacchetti contenenti codice scritto con la Clean Architecture.
 
-* I pacchetti Restaurant e Review sono da completare mentre Persistence è da ricontrollare
-
-* Vanno creati da zero i pacchetti per il logging, il main e la connessione ad internet.
-
-* Andrebbe capito dove vanno implementati i sevizi topo hash perché non ne ho idea.
+* I pacchetti Restaurant e Review sono da completare
 
 * Controllare frontend ed eventualmente refattorizzarlo
 

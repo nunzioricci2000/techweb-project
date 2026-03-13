@@ -1,4 +1,4 @@
-import { User } from "@techweb-backend/auth-core";
+import { User } from "@techweb-project/auth-core";
 
 import Geolocation from "./data_objects/geolocation.js";
 import Image from "./data_objects/image.js";

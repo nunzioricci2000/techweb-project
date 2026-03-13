@@ -1,0 +1,14 @@
+import { DeleteReviewPresenter } from "@techweb-project/review-core";
+import { mapRestaurantError } from "../utils/map_restaurant_error.js";
+
+export class HttpDeleteReviewPresenter extends DeleteReviewPresenter {
+    response = { status: 500, body: { error: "Unknown error" } };
+
+    async present(result) {
+        this.response = { status: 200, body: result };
+    }
+
+    async presentError(error) {
+        this.response = mapRestaurantError(error);
+    }
+}

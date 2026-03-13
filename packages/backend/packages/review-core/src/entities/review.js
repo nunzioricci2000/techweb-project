@@ -1,6 +1,3 @@
-import { User } from "@techweb-backend/auth-core";
-import { Restaurant } from "@techweb-backend/restaurant-core";
-
 export default class Review {
     /** @type {number} */
     id;
@@ -8,27 +5,32 @@ export default class Review {
     /** @type {string} */
     content;
 
+    /** @type {string} */
+    authorUsername;
+
     /** @type {number} */
-    rating;
+    restaurantId;
 
-    /** @type {User} */
-    author;
+    /** @type {number} */
+    upvotes;
 
-    /** @type {Restaurant} */
-    restaurant;
+    /** @type {number} */
+    downvotes;
 
     /**
      * @param {number} id
      * @param {string} content
-     * @param {number} rating
-     * @param {User} author
-     * @param {Restaurant} restaurant
+     * @param {string} authorUsername
+     * @param {number} restaurantId
+     * @param {number} [upvotes]
+     * @param {number} [downvotes]
      */
-    constructor(id, content, rating, author, restaurant) {
+    constructor(id, content, authorUsername, restaurantId, upvotes = 0, downvotes = 0) {
         this.id = id;
         this.content = content;
-        this.rating = rating;
-        this.author = author;
-        this.restaurant = restaurant;
+        this.authorUsername = authorUsername;
+        this.restaurantId = restaurantId;
+        this.upvotes = upvotes;
+        this.downvotes = downvotes;
     }
 }

@@ -1,7 +1,11 @@
 import { LoggerService } from "@techweb-project/core";
 import { UserRepository } from "@techweb-project/auth-core";
+import { RestaurantRepository } from "@techweb-project/restaurant-core";
+import { ReviewRepository } from "@techweb-project/review-core";
 
 import { SequelizeUserRepository } from "./repositories/sequelize_user_repository.js";
+import { SequelizeRestaurantRepository } from "./repositories/sequelize_restaurant_repository.js";
+import { SequelizeReviewRepository } from "./repositories/sequelize_review_repository.js";
 import { Sequelize } from 'sequelize';
 import { initUserModel } from './models/user_model.js';
 import { initRestaurantModel } from './models/restaurant_model.js';
@@ -22,6 +26,12 @@ export class PersistenceRegistry {
     /** @type {UserRepository} */
     #userRepository;
 
+    /** @type {RestaurantRepository} */
+    #restaurantRepository;
+
+    /** @type {ReviewRepository} */
+    #reviewRepository;
+
     constructor({ loggerService, sequelizeConfig, syncOptions }) {
         this.#loggerService = loggerService;
         this.#sequelizeConfig = sequelizeConfig || {
@@ -32,6 +42,8 @@ export class PersistenceRegistry {
         this.#syncOptions = syncOptions || { alter: true };
         this.#sequelize = new Sequelize(this.#sequelizeConfig);
         this.#userRepository = new SequelizeUserRepository(this.#loggerService);
+        this.#restaurantRepository = new SequelizeRestaurantRepository(this.#loggerService);
+        this.#reviewRepository = new SequelizeReviewRepository(this.#loggerService);
     }
 
     /**
@@ -64,6 +76,20 @@ export class PersistenceRegistry {
      */
     getUserRepository() {
         return this.#userRepository;
+    }
+
+    /**
+     * @returns {RestaurantRepository}
+     */
+    getRestaurantRepository() {
+        return this.#restaurantRepository;
+    }
+
+    /**
+     * @returns {ReviewRepository}
+     */
+    getReviewRepository() {
+        return this.#reviewRepository;
     }
 
     async close() {

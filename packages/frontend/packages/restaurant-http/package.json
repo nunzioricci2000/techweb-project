@@ -1,0 +1,9 @@
+{
+    "name": "@techweb-project/frontend-restaurant-http",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "src/index.js",
+    "dependencies": {
+        "@techweb-project/frontend-core": "*"
+    }
+}

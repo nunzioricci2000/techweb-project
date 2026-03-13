@@ -1,0 +1,9 @@
+{
+    "name": "@techweb-project/frontend-restaurant-svelte",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "src/index.js",
+    "dependencies": {
+        "svelte": "^4.2.19"
+    }
+}
