@@ -6,6 +6,7 @@ import { PersistenceRegistry } from "@techweb-project/persistence";
 import Argon2HashService from "@techweb-project/argon2-hash";
 import JwtTokenService from "@techweb-project/jwt-service";
 import { createAuthRouter } from "@techweb-project/auth-koa";
+import cors from "@koa/cors";
 
 const DEFAULT_PORT = 3000;
 const DEFAULT_JWT_EXPIRES_IN = "1h";
@@ -28,6 +29,7 @@ export async function main() {
     });
 
     const app = new Koa();
+    app.use(cors());
     app.use(bodyParser());
 
     const authRouter = createAuthRouter({ userRepository, hashService, tokenService, loggerService });

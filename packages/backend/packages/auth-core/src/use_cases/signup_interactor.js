@@ -53,12 +53,16 @@ export default class SignupInteractor {
                 this.#loggerService.warn(`Signup failed: user ${username} already exists`);
                 throw new UserAlreadyExistsError(username);
             }
+            this.#loggerService.debug(`Hashing password for user: ${username}`);
             const passwordHash = await this.#hashService.hashPassword(password);
+            this.#loggerService.debug(`Creating user: ${username}`);
             const createdUsername = await this.#userRepository.create(username, passwordHash);
+            this.#loggerService.debug(`User created: ${createdUsername}`);
             await this.#signupPresenter.present(createdUsername);
+            this.#loggerService.debug(`Signup successful for user: ${createdUsername}`);
             return new User(createdUsername);
         } catch (error) {
-            this.#loggerService.error(`Signup failed for user: ${username}`);
+            this.#loggerService.error(`Signup failed for user: ${username}\nError: ${error.message}`);
             await this.#signupPresenter.presentError(error);
             return null;
         }
