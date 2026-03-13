@@ -17,6 +17,7 @@ export async function createBackendApp({
     persistenceRegistry = new PersistenceRegistry({ loggerService }),
     hashService = new Argon2HashService(),
     tokenService = new JwtTokenService({
+        loggerService,
         secret: process.env.JWT_SECRET || DEFAULT_JWT_SECRET,
         expiresIn: process.env.JWT_EXPIRES_IN || DEFAULT_JWT_EXPIRES_IN
     })
