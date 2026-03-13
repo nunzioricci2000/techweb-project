@@ -15,15 +15,21 @@ export class PersistenceRegistry {
     /** @type {Sequelize} */
     #sequelize;
 
+    #sequelizeConfig;
+
+    #syncOptions;
+
     /** @type {UserRepository} */
     #userRepository;
 
-    constructor({ loggerService }) {
+    constructor({ loggerService, sequelizeConfig, syncOptions }) {
         this.#loggerService = loggerService;
-        this.#sequelize = new Sequelize({
+        this.#sequelizeConfig = sequelizeConfig || {
             dialect: 'sqlite',
             storage: './database.sqlite'
-        });
+        };
+        this.#syncOptions = syncOptions || { alter: true };
+        this.#sequelize = new Sequelize(this.#sequelizeConfig);
         this.#userRepository = new SequelizeUserRepository(this.#loggerService);
     }
 
@@ -42,7 +48,7 @@ export class PersistenceRegistry {
         initRestaurantModel(this.#sequelize);
         initReviewModel(this.#sequelize);
         initVoteModel(this.#sequelize);
-        await this.#sequelize.sync({ alter: true });
+        await this.#sequelize.sync(this.#syncOptions);
     }
 
     /**
@@ -57,5 +63,9 @@ export class PersistenceRegistry {
      */
     getUserRepository() {
         return this.#userRepository;
+    }
+
+    async close() {
+        await this.#sequelize.close();
     }
 }

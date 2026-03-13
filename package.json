@@ -3,10 +3,26 @@
     "version": "1.0.0",
     "description": "A web technology project",
     "main": "index.js",
+    "private": true,
+    "scripts": {
+        "test": "npm run test:unit && npm run test:integration && npm run test:api && npm run test:ui && npm run test:e2e",
+        "test:unit": "npm run test:unit --workspace techweb-backend && npm run test:unit --workspace @techweb-project/frontend",
+        "test:integration": "npm run test:integration --workspace techweb-backend && npm run test:integration --workspace @techweb-project/frontend",
+        "test:api": "npm run test:api --workspace techweb-backend",
+        "test:ui": "npm run test:ui --workspace @techweb-project/frontend",
+        "test:e2e": "playwright test -c playwright.e2e.config.js"
+    },
     "keywords": [],
     "author": "Nunzio Ricci",
     "license": "ISC",
     "dependencies": {},
+    "devDependencies": {
+        "@playwright/test": "^1.53.2",
+        "@testing-library/svelte": "^5.2.8",
+        "jsdom": "^26.1.0",
+        "supertest": "^7.1.4",
+        "vitest": "^3.2.4"
+    },
     "workspaces": [
         "packages/backend",
         "packages/backend/packages/*",

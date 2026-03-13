@@ -39,3 +39,31 @@ npm run dev --workspace @techweb-project/frontend
 - Copy `packages/frontend/.env.example` to `packages/frontend/.env`.
 - Set `VITE_API_BASE_URL`.
 - Default value is `/api`, which uses Vite dev proxy to forward requests to `http://localhost:3000`.
+
+## Testing
+
+Testing follows a layered structure:
+
+- **Unit tests**: inside each component package (`packages/**/packages/*/src/**/*.test.js`)
+- **Integration tests**:
+	- backend level: `packages/backend/tests/integration`
+	- frontend level: `packages/frontend/tests/integration`
+- **API tests**: backend only, `packages/backend/tests/api`
+- **UI tests**: frontend only, `packages/frontend/tests/ui`
+- **E2E tests**: root level, `tests/e2e`
+
+From repo root:
+
+```bash
+npm run test:unit
+npm run test:integration
+npm run test:api
+npm run test:ui
+npm run test:e2e
+```
+
+Run everything:
+
+```bash
+npm test
+```

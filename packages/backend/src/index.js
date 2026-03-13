@@ -12,21 +12,18 @@ const DEFAULT_PORT = 3000;
 const DEFAULT_JWT_EXPIRES_IN = "1h";
 const DEFAULT_JWT_SECRET = "dev-secret-change-me";
 
-/**
- * @returns {Promise<import('http').Server>}
- */
-export async function main() {
-    const loggerService = new ConsoleLogger();
-
-    const persistenceRegistry = new PersistenceRegistry({ loggerService });
+export async function createBackendApp({
+    loggerService = new ConsoleLogger(),
+    persistenceRegistry = new PersistenceRegistry({ loggerService }),
+    hashService = new Argon2HashService(),
+    tokenService = new JwtTokenService({
+        secret: process.env.JWT_SECRET || DEFAULT_JWT_SECRET,
+        expiresIn: process.env.JWT_EXPIRES_IN || DEFAULT_JWT_EXPIRES_IN
+    })
+} = {}) {
     await persistenceRegistry.initialize();
 
     const userRepository = persistenceRegistry.getUserRepository();
-    const hashService = new Argon2HashService();
-    const tokenService = new JwtTokenService({
-        secret: process.env.JWT_SECRET || DEFAULT_JWT_SECRET,
-        expiresIn: process.env.JWT_EXPIRES_IN || DEFAULT_JWT_EXPIRES_IN
-    });
 
     const app = new Koa();
     app.use(cors());
@@ -36,12 +33,32 @@ export async function main() {
     app.use(authRouter.routes());
     app.use(authRouter.allowedMethods());
 
+    return {
+        app,
+        loggerService,
+        persistenceRegistry
+    };
+}
+
+/**
+ * @returns {Promise<{ server: import('http').Server, persistenceRegistry: PersistenceRegistry }>} 
+ */
+export async function main() {
+    const {
+        app,
+        loggerService,
+        persistenceRegistry
+    } = await createBackendApp();
+
     const port = Number(process.env.PORT) || DEFAULT_PORT;
     const server = app.listen(port, () => {
         loggerService.info(`Backend listening on port ${port}`);
     });
 
-    return server;
+    return {
+        server,
+        persistenceRegistry
+    };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

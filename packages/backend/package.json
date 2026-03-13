@@ -7,7 +7,10 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:unit": "vitest run --dir packages",
+    "test:integration": "vitest run --dir tests/integration",
+    "test:api": "vitest run --dir tests/api",
     "start": "node src/index.js"
   },
   "dependencies": {
