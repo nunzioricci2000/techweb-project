@@ -26,7 +26,8 @@ export class PersistenceRegistry {
         this.#loggerService = loggerService;
         this.#sequelizeConfig = sequelizeConfig || {
             dialect: 'sqlite',
-            storage: './database.sqlite'
+            storage: './database.sqlite',
+            logging: this.#db_logger.bind(this)
         };
         this.#syncOptions = syncOptions || { alter: true };
         this.#sequelize = new Sequelize(this.#sequelizeConfig);
@@ -67,5 +68,9 @@ export class PersistenceRegistry {
 
     async close() {
         await this.#sequelize.close();
+    }
+
+    #db_logger(message) {
+        this.#loggerService.debug(message);
     }
 }
