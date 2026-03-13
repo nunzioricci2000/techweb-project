@@ -5,7 +5,7 @@ import ConsoleLogger from "@techweb-project/console-logger";
 import { PersistenceRegistry } from "@techweb-project/persistence";
 import Argon2HashService from "@techweb-project/argon2-hash";
 import JwtTokenService from "@techweb-project/jwt-service";
-import { createAuthRouter } from "@techweb-project/auth-koa";
+import { createAuthRouter, authMiddleware } from "@techweb-project/auth-koa";
 import cors from "@koa/cors";
 
 const DEFAULT_PORT = 3000;
@@ -28,6 +28,7 @@ export async function createBackendApp({
     const app = new Koa();
     app.use(cors());
     app.use(bodyParser());
+    app.use(authMiddleware(tokenService));
 
     const authRouter = createAuthRouter({ userRepository, hashService, tokenService, loggerService });
     app.use(authRouter.routes());
