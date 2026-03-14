@@ -11,7 +11,7 @@
     export let restaurantStore;
     export let restaurantActions;
 
-    let currentRoute = "/login";
+    let currentRoute = "/home";
     let selectedRestaurantId = null;
 
     function resolveRoute() {
@@ -48,27 +48,28 @@
         window.addEventListener("hashchange", resolveRoute);
         return () => window.removeEventListener("hashchange", resolveRoute);
     });
-
-    $: if (
-        (currentRoute === "/home" || currentRoute === "/restaurants/new") &&
-        !$authStore.isAuthenticated
-    ) {
-        currentRoute = "/login";
-        window.location.hash = "#/login";
-    }
 </script>
 
-<nav>
-    <a href="#/login">Login</a>
-    <a href="#/signup">Signup</a>
-    <a href="#/home">Restaurants</a>
-    {#if $authStore.isAuthenticated}
-        <a href="#/restaurants/new">Create Restaurant</a>
-    {/if}
-    {#if $authStore.isAuthenticated}
-        <button type="button" on:click={onLogout}>Logout</button>
-    {/if}
-</nav>
+<header>
+    <nav>
+        <ul>
+            <li><strong>Webtech's Fakerestaurant</strong></li>
+        </ul>
+        <ul>
+            <li><a href="#/login">Login</a></li>
+            <li><a href="#/signup">Signup</a></li>
+            <li><a href="#/home">Restaurants</a></li>
+            {#if $authStore.isAuthenticated}
+                <li><a href="#/restaurants/new">Create Restaurant</a></li>
+            {/if}
+            {#if $authStore.isAuthenticated}
+                <li>
+                    <button type="button" on:click={onLogout}>Logout</button>
+                </li>
+            {/if}
+        </ul>
+    </nav>
+</header>
 
 <main>
     {#if currentRoute === "/signup"}
@@ -89,34 +90,6 @@
     {/if}
 </main>
 
-<style>
-    :global(body) {
-        font-family: sans-serif;
-        margin: 0;
-        padding: 2rem;
-    }
-
-    nav {
-        display: flex;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-        align-items: center;
-    }
-
-    :global(form) {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        max-width: 320px;
-    }
-
-    :global(label) {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-    }
-
-    button {
-        width: fit-content;
-    }
+<style lang="scss">
+    @import url("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css");
 </style>

@@ -12,7 +12,7 @@ async function bootstrap() {
     await actions.hydrateSession();
 
     return new App({
-        target: document.getElementById("app"),
+        target: document.getElementsByTagName("body")[0],
         props: {
             authStore,
             actions,

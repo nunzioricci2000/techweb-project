@@ -1,12 +1,13 @@
 import { AuthCoreRegistry } from "@techweb-project/frontend-auth-core";
 import { HttpAuthApi, BrowserSessionRepository } from "@techweb-project/frontend-auth-http";
 import { createAuthStore, SvelteLoginPresenter, SvelteSignupPresenter, SvelteLogoutPresenter } from "@techweb-project/frontend-auth-svelte";
-import { ConsoleLoggerService, FetchHttpClient, LocalStorageService } from "@techweb-project/frontend-core";
+import { FetchHttpClient, LocalStorageService } from "@techweb-project/frontend-core";
+import { ConsoleLogger } from "@techweb-project/common";
 
 export function createAuthContext({ apiBaseUrl }) {
     const authStore = createAuthStore();
 
-    const loggerService = new ConsoleLoggerService();
+    const loggerService = new ConsoleLogger();
     const httpClient = new FetchHttpClient(window.fetch.bind(window));
     const storageService = new LocalStorageService(window.localStorage);
 
