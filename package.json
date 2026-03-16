@@ -24,11 +24,12 @@
         "vitest": "^3.2.4"
     },
     "workspaces": [
-        "packages/backend",
-        "packages/backend/core/*",
-        "packages/backend/infra/*",
-        "packages/common/*",
-        "packages/frontend",
-        "packages/frontend/packages/*"
+        "backend",
+        "backend/core/*",
+        "backend/infra/*",
+        "common/*",
+        "frontend",
+        "frontend/core/*",
+        "frontend/infra/*"
     ]
 }

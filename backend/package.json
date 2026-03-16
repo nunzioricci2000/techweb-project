@@ -5,13 +5,13 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "src/index.js",
+  "main": "main/index.js",
   "scripts": {
     "test": "vitest run",
     "test:unit": "vitest run --dir packages",
     "test:integration": "vitest run --dir tests/integration",
     "test:api": "vitest run --dir tests/api",
-    "start": "node src/index.js"
+    "start": "node main/index.js"
   },
   "dependencies": {
     "@koa/multer": "^4.0.0",

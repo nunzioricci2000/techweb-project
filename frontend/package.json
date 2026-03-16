@@ -14,7 +14,8 @@
         "test:ui": "playwright test -c playwright.ui.config.js"
     },
     "workspaces": [
-        "packages/*"
+        "core/*",
+        "infra/*"
     ],
     "dependencies": {
         "@techweb-project/common": "*",
