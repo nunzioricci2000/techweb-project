@@ -10,7 +10,7 @@ import { HttpSignupPresenter } from "./presenters/http_signup_presenter.js";
  * @param {import('@techweb-project/auth-core').UserRepository} params.userRepository
  * @param {import('@techweb-project/auth-core').HashService} params.hashService
  * @param {import('@techweb-project/auth-core').TokenService} params.tokenService
- * @param {import('@techweb-project/core').LoggerService} params.loggerService
+ * @param {import('@techweb-project/logger').LoggerService} params.loggerService
  * @returns {import('@koa/router')}
  */
 export function createAuthRouter({ userRepository, hashService, tokenService, loggerService }) {

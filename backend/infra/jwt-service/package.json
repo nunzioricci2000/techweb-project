@@ -4,6 +4,6 @@
   "main": "src/index.js",
   "dependencies": {
     "@techweb-project/auth-core": "*",
-    "@techweb-project/core": "*"
+    "@techweb-project/logger": "*"
   }
 }

@@ -22,7 +22,7 @@
     "@techweb-project/auth-core": "*",
     "@techweb-project/auth-koa": "*",
     "@techweb-project/console-logger": "*",
-    "@techweb-project/core": "*",
+    "@techweb-project/logger": "*",
     "@techweb-project/jwt-service": "*",
     "@techweb-project/persistence": "*",
     "@techweb-project/restaurant-core": "*",
@@ -36,7 +36,7 @@
     "sqlite3": "^5.1.7"
   },
   "workspaces": [
-    "packages/core/*",
-    "packages/infra/*"
+    "core/*",
+    "infra/*"
   ]
 }

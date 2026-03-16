@@ -18,7 +18,6 @@
         "infra/*"
     ],
     "dependencies": {
-        "@techweb-project/common": "*",
         "@techweb-project/frontend-auth-core": "*",
         "@techweb-project/frontend-auth-http": "*",
         "@techweb-project/frontend-auth-svelte": "*",

@@ -3,7 +3,7 @@
   "type": "module",
   "main": "src/index.js",
   "dependencies": {
-    "@techweb-project/core": "*",
+    "@techweb-project/logger": "*",
     "@techweb-project/auth-core": "*"
   }
 }
