@@ -36,6 +36,7 @@
     "sqlite3": "^5.1.7"
   },
   "workspaces": [
-    "packages/*"
+    "packages/core/*",
+    "packages/infra/*"
   ]
 }

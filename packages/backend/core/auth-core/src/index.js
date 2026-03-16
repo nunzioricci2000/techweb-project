@@ -10,7 +10,7 @@ import LoginInteractor from "./use_cases/login_interactor.js";
 import SignupInteractor from "./use_cases/signup_interactor.js";
 export { HashService, TokenService, UserRepository, LoginPresenter, SignupPresenter };
 
-import { LoggerService } from "@techweb-project/core";
+import LoggerService from "@techweb-project/logger";
 
 export class AuthCoreRegistry {
     /** @type {LoginInteractor} */

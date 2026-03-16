@@ -1,4 +1,4 @@
-import { LoggerService } from "@techweb-project/core";
+import LoggerService from '@techweb-project/logger';
 import { UserRepository } from "@techweb-project/auth-core";
 import { RestaurantRepository } from "@techweb-project/restaurant-core";
 import { ReviewRepository } from "@techweb-project/review-core";

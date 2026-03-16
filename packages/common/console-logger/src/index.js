@@ -1,4 +1,4 @@
-import { LoggerService } from '@techweb-project/core';
+import LoggerService from '@techweb-project/logger';
 
 const DEFAULT_CONFIG = {
     format: '[{type}] {callerName} ({callerFile}:{line}:{column})',

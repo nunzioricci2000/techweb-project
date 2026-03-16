@@ -1,4 +1,4 @@
-import { LoggerService } from "@techweb-project/core";
+import LoggerService from "@techweb-project/logger";
 
 import User from "../entities/user.js";
 import InvalidCredentialsError from "../errors/invalid_credentials.js";

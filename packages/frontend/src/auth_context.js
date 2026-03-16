@@ -2,7 +2,7 @@ import { AuthCoreRegistry } from "@techweb-project/frontend-auth-core";
 import { HttpAuthApi, BrowserSessionRepository } from "@techweb-project/frontend-auth-http";
 import { createAuthStore, SvelteLoginPresenter, SvelteSignupPresenter, SvelteLogoutPresenter } from "@techweb-project/frontend-auth-svelte";
 import { FetchHttpClient, LocalStorageService } from "@techweb-project/frontend-core";
-import { ConsoleLogger } from "@techweb-project/common";
+import ConsoleLogger from "@techweb-project/console-logger";
 
 export function createAuthContext({ apiBaseUrl }) {
     const authStore = createAuthStore();

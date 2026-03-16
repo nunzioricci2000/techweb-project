@@ -1,5 +1,5 @@
 {
-  "name": "@techweb-project/core",
+  "name": "@techweb-project/logger",
   "type": "module",
   "main": "src/index.js"
 }

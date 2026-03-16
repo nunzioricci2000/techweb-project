@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 import { TokenService } from "@techweb-project/auth-core";
-import { LoggerService } from "@techweb-project/core";
+import LoggerService from "@techweb-project/logger";
 
 /**
  * JWT-based implementation of the TokenService.
